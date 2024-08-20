@@ -1,0 +1,24 @@
+FROM registry.access.redhat.com/ubi9/openjdk-21:1.20
+
+# Jenkins .war requires git to be present for the build.
+USER root
+RUN microdnf install -y git
+
+USER 185
+
+# Jenkins runs in an "executable .war" file, packaging its own Jetty servlet.
+# These environment variables tune the s2i assemble script to execute a quick build of the Jenkins
+# .war file. JAVA_APP_JAR instructs the s2i run script to run the app using the executable war.
+ENV JAVA_APP_JAR="jenkins.war" \ 
+    MAVEN_ARGS="-am -pl war,bom -Pquick-build" \
+    MAVEN_S2I_ARTIFACT_DIRS="war/target" \
+    MAVEN_S2I_GOALS="clean install" \
+    S2I_SOURCE_DEPLOYMENTS_FILTER="*.war"
+
+# Copying in source code. Red Hat OpenJDK S2I buiders expect source content in /tmp/src by default
+COPY --chown=185:0 . /tmp/src
+
+RUN /usr/local/s2i/assemble
+# Run script sourced from builder image based on user input or image metadata.
+# If this file does not exist in the image, the build will fail.
+CMD /usr/local/s2i/run
