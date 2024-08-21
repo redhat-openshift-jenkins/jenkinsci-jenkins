@@ -25,6 +25,10 @@ spec:
     value: quay.io/redhat-user-workloads/rh-openshift-builds-tenant/openshift-jenkins-2-462/jenkins-war:{{revision}}
   - name: dockerfile
     value: .konflux/Containerfile
+  - name: hermetic
+    value: "false"
+  - name: build-source-image
+    value: "true"
   pipelineSpec:
     finally:
     - name: show-sbom
