@@ -28,6 +28,10 @@ spec:
     value: 5d
   - name: dockerfile
     value: .konflux/Containerfile
+  - name: hermetic
+    value: "false"
+  - name: build-source-image
+    value: "true"
   pipelineSpec:
     finally:
     - name: show-sbom
