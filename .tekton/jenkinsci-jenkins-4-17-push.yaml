@@ -25,6 +25,8 @@ spec:
     value: quay.io/redhat-user-workloads/ocp-tools-jenkins-tenant/jenkinsci-jenkins-4-17:{{revision}}
   - name: dockerfile
     value: .konflux/Containerfile
+  - name: build-source-image
+    value: "true"
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
