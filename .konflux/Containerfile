@@ -31,3 +31,11 @@ USER 185
 COPY --from=builder --chown=185:0 /deployments/*.war /deployments/
 # JAVA_APP_JAR instructs the image run script to use the executable war as its main class.
 ENV JAVA_APP_JAR="jenkins.war"
+
+LABEL com.redhat.component="ocp-tools-jenkins-war-container" \
+      description="Jenkins WAR container image" \
+      io.k8s.description="Jenkins WAR container image" \
+      io.k8s.display-name="Jenkins WAR" \
+      io.openshift.tags="ci,jenkins,jenkins2" \
+      name="ocp-tools-4/jenkins-war" \
+      summary="Jenkins WAR container image - not intended to be run on OpenShift"
