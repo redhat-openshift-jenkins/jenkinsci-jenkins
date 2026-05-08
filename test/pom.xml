@@ -228,7 +228,7 @@ THE SOFTWARE.
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>junit</artifactId>
-      <version>1296.vb_f538b_c88630</version>
+      <version>1403.vd9d1413fd205</version>
       <scope>test</scope>
     </dependency>
     <dependency>
